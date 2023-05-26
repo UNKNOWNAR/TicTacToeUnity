@@ -11,20 +11,17 @@ public class MultiPlayerLogicScript : MonoBehaviour
     [SerializeField] private Sprite defaultSprite;
     [SerializeField] private Text result;
     [SerializeField] private GameObject gameOverScreen;
-    [SerializeField] private AudioSource clickSoundSource;
 
     private int currentButtonNumber,numberOfMoves;
     private Button button;
     private bool isTurnOfX;
     private char[] moveArray;
-    private float pitch;
 
     private void Awake()
     {
         numberOfMoves = 0;
         isTurnOfX = true;
         moveArray = new char[9];
-        pitch = 0.1f;
     }
 
     private void Update()
@@ -58,9 +55,6 @@ public class MultiPlayerLogicScript : MonoBehaviour
         }
         button.enabled = false;
         numberOfMoves++;
-        clickSoundSource.pitch = pitch;
-        clickSoundSource.Play();
-        pitch += 0.05F;
     }
 
     public void checkWinner()

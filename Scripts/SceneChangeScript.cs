@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneChangeScript : MonoBehaviour
 {
-    private const string HOME_SCENE = "HomeScene";
-    private const string SELECT_GAME_MODE_SCENE = "SelectGameModeScene";
-    private const string SELECT_DIFFICULTY_SCENE = "SelectDifficultyScene";
-    private const string MULTI_PLAYER_SCENE = "MultiplayerScene";
-    private const string SINGLE_PLAYER_SCENE = "SinglePlayerScene";
+    private const string HOME_SCENE = "0. HomeScene";
+    private const string SELECT_GAME_MODE_SCENE = "1. SelectGameModeScene";
+    private const string SELECT_DIFFICULTY_SCENE = "2. SelectDifficultyScene";
+    private const string MULTI_PLAYER_SCENE = "2. MultiplayerScene";
+    private const string SINGLE_PLAYER_SCENE = "3. SinglePlayerScene";
 
     public void OpenSelectGameModeScene()
     {

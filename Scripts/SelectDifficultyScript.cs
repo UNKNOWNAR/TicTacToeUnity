@@ -40,7 +40,7 @@ public class SelectDifficultyScript : MonoBehaviour
         SaveDifficultyText();
     }
 
-    public void SaveDifficultyText()
+    private void SaveDifficultyText()
     {
         PlayerPrefs.SetString(DIFFICULTY_SELECTED, selectedDifficulty);
     }
