@@ -11,6 +11,8 @@ public class SinglePlayerLogicScript : MonoBehaviour
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private AudioSource clickSoundSource;
 
+    private string selectedDifficultyString;
+
     private const string DIFFICULTY_SELECTED = "DifficultySelected";
     TTTAI ai = new TTTAI();
     Check check1 = new Check();
@@ -20,6 +22,7 @@ public class SinglePlayerLogicScript : MonoBehaviour
         if (PlayerPrefs.HasKey(DIFFICULTY_SELECTED))
         {
             selectedDifficulty.text = PlayerPrefs.GetString(DIFFICULTY_SELECTED);
+            selectedDifficultyString = PlayerPrefs.GetString(DIFFICULTY_SELECTED);
         }
         else
         {
