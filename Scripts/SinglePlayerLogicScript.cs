@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,32 +11,40 @@ public class SinglePlayerLogicScript : MonoBehaviour
     [SerializeField] private Sprite defaultSprite;
     [SerializeField] private Text message;
     [SerializeField] private GameObject gameOverScreen;
-    [SerializeField] private AudioSource clickSoundSource;
 
     private string selectedDifficultyString;
+    private int selectedDifficultyInteger;
 
-    private const string DIFFICULTY_SELECTED = "DifficultySelected";
-    TTTAI ai = new TTTAI();
-    Check check1 = new Check();
+    private const string DIFFICULTY_SELECTED_STRING = "DifficultySelectedString";
+    private const string DIFFICULTY_SELECTED_INTEGER = "DifficultySelectedInteger";
+
+    [SerializeField] private TTTAI ai;
+    [SerializeField] private Check check1;
     char[] play = new char[9];
     private Button button;
     private int moveNumber = 0;
     private int difficulty = 4;
     private int previousMove = 69;
-    private int choice = (new System.Random().Next(2) + 1);
+
+    // setting choice to 0 manually for testing
+    private int choice = 0; //(new System.Random().Next(2) + 1);
     private char nextCharacter = 'O';
+
+    private int n;
     private void Start()
     {
         message.text = (choice == 1) ? "Computer's First Move" : "Players First Move";
         if (choice == 1)
         {
             nextCharacter = 'X';
-            outputbyComputer();//To start the game when computer is supposed to give the first move
+            outputbyComputer(); // To start the game when computer is supposed to give the first move
         }
-        if (PlayerPrefs.HasKey(DIFFICULTY_SELECTED))
+        if (PlayerPrefs.HasKey(DIFFICULTY_SELECTED_STRING) && PlayerPrefs.HasKey(DIFFICULTY_SELECTED_INTEGER))
         {
-            selectedDifficulty.text = PlayerPrefs.GetString(DIFFICULTY_SELECTED);
-            selectedDifficultyString = PlayerPrefs.GetString(DIFFICULTY_SELECTED);
+            selectedDifficultyString = PlayerPrefs.GetString(DIFFICULTY_SELECTED_STRING);
+            selectedDifficultyInteger = PlayerPrefs.GetInt(DIFFICULTY_SELECTED_INTEGER);
+            
+            selectedDifficulty.text = selectedDifficultyInteger + ". " + selectedDifficultyString;
         }
         else
         {
@@ -43,7 +52,19 @@ public class SinglePlayerLogicScript : MonoBehaviour
             Debug.LogError("User did not select a difficulty level");
         }
         fill();
+
+        /*for (int i = 0; i < play.Length; i++)
+        {
+            Debug.Log(i+". " + play[i]);
+        }*/
     }
+
+    private void Update()
+    {
+        //n = GetLastButtonClicked();
+        //button = GameObject.FindGameObjectWithTag(n.ToString()).GetComponent<Button>();
+    }
+
     int GetLastButtonClicked()
     {
         return int.Parse(EventSystem.current.currentSelectedGameObject.name);
@@ -57,6 +78,8 @@ public class SinglePlayerLogicScript : MonoBehaviour
     public void OnButtonClicked()
     {
         int n = GetLastButtonClicked();
+        Debug.Log(n);
+        button = GameObject.FindGameObjectWithTag(n.ToString()).GetComponent<Button>();
         if (moveNumber % 2 == 0)
         {
             play[n] = 'X';
@@ -67,22 +90,42 @@ public class SinglePlayerLogicScript : MonoBehaviour
             play[n] = 'O';
             button.image.sprite = O;
         }
+
+        /*for (int i = 0; i < play.Length; i++)
+        {
+            Debug.Log(i + ". " + play[i]);
+        }*/
+
         button.enabled = false;
         previousMove = n;
         moveNumber++;
-        if (moveNumber > 4)
+
+        //Debug.Log(moveNumber);
+        //if (moveNumber > 4)
+
             check();
         outputbyComputer();
+
+        //Debug.Log(moveNumber);
     }
     private void outputbyComputer()
     {
         // Calling TTTAI
-        message.text = "MOVE BY COMPUTER,PLAYER ENTER";
+
+        //message.text = "MOVE BY COMPUTER,PLAYER ENTER";
+
         int n = ai.input(play, choice, previousMove, difficulty);
-        button.enabled = false;
+        Debug.Log(n);
         play[n] = nextCharacter;
+
+        /*for (int i = 0; i < play.Length; i++)
+        {
+            Debug.Log(i + ". " + play[i]);
+        }*/
+
         button = GameObject.FindGameObjectWithTag(n.ToString()).GetComponent<Button>();
-        button.image.sprite = (nextCharacter=='X')?X: O;
+        button.image.sprite = (nextCharacter == 'X') ? X : O;
+        button.enabled = false;
         moveNumber++;
     }
     void check()
@@ -91,19 +134,31 @@ public class SinglePlayerLogicScript : MonoBehaviour
         {
             message.text = "GameDrawn";
             moveNumber = 69;
+
+            //Debug.Log("Error 1");
         }
-        else if (check1.check(play)+choice==2)
+
+        // The following part is causing match to end after 1 move by user and one move by ai
+
+        /*else if (check1.check(play)+choice==2)
         {
             message.text = "Congratulations, Player Won";
             moveNumber = 69;
+
+            //Debug.Log("Error 2");
         }
         else
         {
             message.text = "Computer Won";
             moveNumber = 69;
-        }
+        }*/
+
         if (moveNumber == 69)
+        {
             onGameOver();
+
+            //Debug.Log("Game Over");
+        }
     }
     private void onGameOver()
     {
@@ -112,7 +167,9 @@ public class SinglePlayerLogicScript : MonoBehaviour
             button = GameObject.FindGameObjectWithTag(j.ToString()).GetComponent<Button>();
             if (button.image.sprite == defaultSprite)
                 button.interactable = false;
-            fill();
+
+            // No need to fill array after match end since it is resetting automatically when user presses restart or returns to homescene
+            //fill();
         }
         gameOver();
     }

@@ -1,5 +1,7 @@
 using System;
-public class Check 
+using UnityEngine;
+
+public class Check : MonoBehaviour
 {
     // "X" - 0,"O" - 1,No Result - 2
     char c;

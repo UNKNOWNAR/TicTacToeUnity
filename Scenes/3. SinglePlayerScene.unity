@@ -373,6 +373,8 @@ GameObject:
   m_Component:
   - component: {fileID: 42091947}
   - component: {fileID: 42091948}
+  - component: {fileID: 42091949}
+  - component: {fileID: 42091950}
   m_Layer: 0
   m_Name: Logic Manager
   m_TagString: Untagged
@@ -411,9 +413,34 @@ MonoBehaviour:
   X: {fileID: 21300000, guid: e47a1c391d1a12e4184ea9f5553fd649, type: 3}
   O: {fileID: 21300000, guid: d8372a6abd4e8ee40838a0ca3969afdc, type: 3}
   defaultSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  message: {fileID: 0}
-  gameOverScreen: {fileID: 0}
-  clickSoundSource: {fileID: 0}
+  message: {fileID: 1885141771}
+  gameOverScreen: {fileID: 1116283825}
+  ai: {fileID: 42091949}
+  check1: {fileID: 42091950}
+--- !u!114 &42091949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42091946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28c434756128cf247bb2214d515e7840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &42091950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42091946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4868269df89ac34c94df5b908b4d0d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &60139409
 GameObject:
   m_ObjectHideFlags: 0
@@ -3412,67 +3439,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735445449}
   m_CullTransparentMesh: 1
---- !u!1001 &1813224188
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 77300303973141200, guid: 5ddceba3282d55447946f306786d9345, type: 3}
-      propertyPath: m_Name
-      value: Click Sound Source
-      objectReference: {fileID: 0}
-    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5ddceba3282d55447946f306786d9345, type: 3}
 --- !u!1 &1858219139
 GameObject:
   m_ObjectHideFlags: 0

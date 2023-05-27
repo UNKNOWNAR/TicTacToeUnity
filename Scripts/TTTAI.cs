@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class TTTAI
+public class TTTAI : MonoBehaviour
 {
     int i = 0;
     int n = 0;
@@ -312,19 +312,5 @@ public class TTTAI
         //calls for the random function to allot position at random as no pattern is present
         z = Random(play);
         return z;
-    }
-}
-public class TTTAI1 : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
