@@ -23,6 +23,8 @@ public class MusicScript : MonoBehaviour
 
         musicSource.volume = 0.5f;
         clickSource.volume = 0.25f;
+
+        musicSource.loop = true;
     }
 
     public void Onclick()
