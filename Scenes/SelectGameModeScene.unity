@@ -416,7 +416,6 @@ MonoBehaviour:
   sound_off: {fileID: 21300000, guid: e54e602463bd86444ae5b2f1d968f4b6, type: 3}
   background: {fileID: 1974538239}
   checkmark: {fileID: 1225227084}
-  click: {fileID: 0}
 --- !u!4 &557081403
 Transform:
   m_ObjectHideFlags: 0

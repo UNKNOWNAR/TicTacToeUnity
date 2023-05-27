@@ -408,6 +408,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedDifficulty: {fileID: 255789615}
+  X: {fileID: 21300000, guid: e47a1c391d1a12e4184ea9f5553fd649, type: 3}
+  O: {fileID: 21300000, guid: d8372a6abd4e8ee40838a0ca3969afdc, type: 3}
+  defaultSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  message: {fileID: 0}
+  gameOverScreen: {fileID: 0}
+  clickSoundSource: {fileID: 0}
 --- !u!1 &60139409
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,6 +811,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 42091948}
+        m_TargetAssemblyTypeName: SinglePlayerLogicScript, Assembly-CSharp
+        m_MethodName: OnButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &373688357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -939,6 +957,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 42091948}
+        m_TargetAssemblyTypeName: SinglePlayerLogicScript, Assembly-CSharp
+        m_MethodName: OnButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &396173105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1064,6 +1094,18 @@ MonoBehaviour:
       - m_Target: {fileID: 205254655}
         m_TargetAssemblyTypeName: ToggleScript, Assembly-CSharp
         m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 42091948}
+        m_TargetAssemblyTypeName: SinglePlayerLogicScript, Assembly-CSharp
+        m_MethodName: OnButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1331,6 +1373,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 42091948}
+        m_TargetAssemblyTypeName: SinglePlayerLogicScript, Assembly-CSharp
+        m_MethodName: OnButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &837152491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1545,6 +1599,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 42091948}
+        m_TargetAssemblyTypeName: SinglePlayerLogicScript, Assembly-CSharp
+        m_MethodName: OnButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &934541709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1670,6 +1736,18 @@ MonoBehaviour:
       - m_Target: {fileID: 205254655}
         m_TargetAssemblyTypeName: ToggleScript, Assembly-CSharp
         m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 42091948}
+        m_TargetAssemblyTypeName: SinglePlayerLogicScript, Assembly-CSharp
+        m_MethodName: OnButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1876,7 +1954,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1116283826
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1891,7 +1969,6 @@ RectTransform:
   m_Children:
   - {fileID: 1231270013}
   - {fileID: 2053958312}
-  - {fileID: 1885141770}
   m_Father: {fileID: 1407429988}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2302,6 +2379,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 42091948}
+        m_TargetAssemblyTypeName: SinglePlayerLogicScript, Assembly-CSharp
+        m_MethodName: OnButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1283148103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2620,6 +2709,7 @@ RectTransform:
   - {fileID: 1662578807}
   - {fileID: 488031950}
   - {fileID: 255789614}
+  - {fileID: 1885141770}
   - {fileID: 1116283826}
   - {fileID: 1300868949}
   m_Father: {fileID: 0}
@@ -2966,6 +3056,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 42091948}
+        m_TargetAssemblyTypeName: SinglePlayerLogicScript, Assembly-CSharp
+        m_MethodName: OnButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1626732147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3180,6 +3282,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 42091948}
+        m_TargetAssemblyTypeName: SinglePlayerLogicScript, Assembly-CSharp
+        m_MethodName: OnButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1662578809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3298,6 +3412,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735445449}
   m_CullTransparentMesh: 1
+--- !u!1001 &1813224188
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 77300303973141200, guid: 5ddceba3282d55447946f306786d9345, type: 3}
+      propertyPath: m_Name
+      value: Click Sound Source
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808758241460795984, guid: 5ddceba3282d55447946f306786d9345, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5ddceba3282d55447946f306786d9345, type: 3}
 --- !u!1 &1858219139
 GameObject:
   m_ObjectHideFlags: 0
@@ -3390,7 +3565,7 @@ GameObject:
   - component: {fileID: 1885141772}
   - component: {fileID: 1885141771}
   m_Layer: 5
-  m_Name: Result
+  m_Name: Message
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3408,8 +3583,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1116283826}
-  m_RootOrder: 2
+  m_Father: {fileID: 1407429988}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3449,7 +3624,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: (result)
+  m_Text: 
 --- !u!222 &1885141772
 CanvasRenderer:
   m_ObjectHideFlags: 0

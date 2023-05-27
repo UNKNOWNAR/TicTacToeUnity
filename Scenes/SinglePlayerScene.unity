@@ -168,6 +168,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedDifficulty: {fileID: 255789615}
+  X: {fileID: 21300000, guid: e47a1c391d1a12e4184ea9f5553fd649, type: 3}
+  O: {fileID: 21300000, guid: d8372a6abd4e8ee40838a0ca3969afdc, type: 3}
+  defaultSprite: {fileID: 0}
+  result: {fileID: 0}
+  gameOverScreen: {fileID: 0}
+  clickSoundSource: {fileID: 0}
 --- !u!1 &60139409
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +300,6 @@ MonoBehaviour:
   sound_off: {fileID: 21300000, guid: e54e602463bd86444ae5b2f1d968f4b6, type: 3}
   background: {fileID: 1337940213}
   checkmark: {fileID: 1060669345}
-  click: {fileID: 0}
 --- !u!4 &205254656
 Transform:
   m_ObjectHideFlags: 0
@@ -3247,7 +3252,7 @@ GameObject:
   - component: {fileID: 1885141772}
   - component: {fileID: 1885141771}
   m_Layer: 5
-  m_Name: Result
+  m_Name: Message
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3306,7 +3311,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: (result)
+  m_Text: Message
 --- !u!222 &1885141772
 CanvasRenderer:
   m_ObjectHideFlags: 0
