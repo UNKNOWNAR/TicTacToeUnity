@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-public class Check : MonoBehaviour
+public class Check
 {
-    // "X" - 0,"O" - 1,No Result - 2
+    // "X" - 0,"O" - 1,No Result - 69
     char c;
     public int check(char[] play)
     {
@@ -37,6 +37,6 @@ public class Check : MonoBehaviour
             return 0;
         else if(c =='O')
             return 1;
-        return 2;
+        return 69;
     }
 }

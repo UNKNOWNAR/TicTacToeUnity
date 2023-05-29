@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,58 +12,41 @@ public class SinglePlayerLogicScript : MonoBehaviour
     [SerializeField] private GameObject gameOverScreen;
 
     private string selectedDifficultyString;
-    private int selectedDifficultyInteger;
-
-    private const string DIFFICULTY_SELECTED_STRING = "DifficultySelectedString";
-    private const string DIFFICULTY_SELECTED_INTEGER = "DifficultySelectedInteger";
-
-    [SerializeField] private TTTAI ai;
-    [SerializeField] private Check check1;
+    private TTTAI ai = new TTTAI();
     char[] play = new char[9];
     private Button button;
     private int moveNumber = 0;
     private int difficulty = 4;
     private int previousMove = 69;
-
-    // setting choice to 0 manually for testing
-    private int choice = 0; //(new System.Random().Next(2) + 1);
+    private int choice =  (new System.Random().Next(2) + 1);
     private char nextCharacter = 'O';
+    private bool gameIsOver = false;
 
-    private int n;
+    private const string DIFFICULTY_SELECTED_STRING = "DifficultySelectedString";
+    private const string DIFFICULTY_SELECTED_INTEGER = "DifficultySelectedInteger";
+
     private void Start()
     {
-        message.text = (choice == 1) ? "Computer's First Move" : "Players First Move";
+        fill();
+        message.text = (choice == 1) ? "Computer's First Move" : "Your First Move";
         if (choice == 1)
         {
             nextCharacter = 'X';
-            outputbyComputer(); // To start the game when computer is supposed to give the first move
+            outputbyComputer();//To start the game when computer is supposed to give the first move
         }
         if (PlayerPrefs.HasKey(DIFFICULTY_SELECTED_STRING) && PlayerPrefs.HasKey(DIFFICULTY_SELECTED_INTEGER))
         {
             selectedDifficultyString = PlayerPrefs.GetString(DIFFICULTY_SELECTED_STRING);
-            selectedDifficultyInteger = PlayerPrefs.GetInt(DIFFICULTY_SELECTED_INTEGER);
-            
-            selectedDifficulty.text = selectedDifficultyInteger + ". " + selectedDifficultyString;
+            difficulty = PlayerPrefs.GetInt(DIFFICULTY_SELECTED_INTEGER);
+            Debug.Log(difficulty);
+            selectedDifficulty.text = difficulty + ". " + selectedDifficultyString;
         }
         else
         {
             selectedDifficulty.text = "No Difficulty Selected";
             Debug.LogError("User did not select a difficulty level");
         }
-        fill();
-
-        /*for (int i = 0; i < play.Length; i++)
-        {
-            Debug.Log(i+". " + play[i]);
-        }*/
     }
-
-    private void Update()
-    {
-        //n = GetLastButtonClicked();
-        //button = GameObject.FindGameObjectWithTag(n.ToString()).GetComponent<Button>();
-    }
-
     int GetLastButtonClicked()
     {
         return int.Parse(EventSystem.current.currentSelectedGameObject.name);
@@ -77,8 +59,10 @@ public class SinglePlayerLogicScript : MonoBehaviour
     }
     public void OnButtonClicked()
     {
+        if (gameIsOver)
+        { return; }
+        message.text = null;
         int n = GetLastButtonClicked();
-        Debug.Log(n);
         button = GameObject.FindGameObjectWithTag(n.ToString()).GetComponent<Button>();
         if (moveNumber % 2 == 0)
         {
@@ -90,74 +74,51 @@ public class SinglePlayerLogicScript : MonoBehaviour
             play[n] = 'O';
             button.image.sprite = O;
         }
-
-        /*for (int i = 0; i < play.Length; i++)
-        {
-            Debug.Log(i + ". " + play[i]);
-        }*/
-
         button.enabled = false;
         previousMove = n;
         moveNumber++;
-
-        //Debug.Log(moveNumber);
-        //if (moveNumber > 4)
-
-            check();
-        outputbyComputer();
-
-        //Debug.Log(moveNumber);
+        check();
+        if (!gameIsOver)
+        {
+            outputbyComputer();
+        }
     }
     private void outputbyComputer()
     {
         // Calling TTTAI
-
-        //message.text = "MOVE BY COMPUTER,PLAYER ENTER";
-
         int n = ai.input(play, choice, previousMove, difficulty);
-        Debug.Log(n);
+        //message.text = "Move By Player";
         play[n] = nextCharacter;
-
-        /*for (int i = 0; i < play.Length; i++)
-        {
-            Debug.Log(i + ". " + play[i]);
-        }*/
-
         button = GameObject.FindGameObjectWithTag(n.ToString()).GetComponent<Button>();
-        button.image.sprite = (nextCharacter == 'X') ? X : O;
         button.enabled = false;
+        button.image.sprite = (nextCharacter == 'X') ? X : O;
         moveNumber++;
+            check();
     }
     void check()
     {
-        if(moveNumber==9)
+        Check check1 = new Check();
+        int store = check1.check(play);
+        
+        if (store + choice == 2)
         {
-            message.text = "GameDrawn";
-            moveNumber = 69;
-
-            //Debug.Log("Error 1");
+            message.text = "Congratulations! You Won";
+            moveNumber = 69;            
         }
-
-        // The following part is causing match to end after 1 move by user and one move by ai
-
-        /*else if (check1.check(play)+choice==2)
-        {
-            message.text = "Congratulations, Player Won";
-            moveNumber = 69;
-
-            //Debug.Log("Error 2");
-        }
-        else
+        else if (store == 0 || store == 1)
         {
             message.text = "Computer Won";
             moveNumber = 69;
-        }*/
-
+        }
+        else if (moveNumber >= 9)
+        {
+            message.text = "Game is a Draw";
+            moveNumber = 69;
+        }
         if (moveNumber == 69)
         {
+            gameIsOver = true;
             onGameOver();
-
-            //Debug.Log("Game Over");
         }
     }
     private void onGameOver()
@@ -166,10 +127,9 @@ public class SinglePlayerLogicScript : MonoBehaviour
         {
             button = GameObject.FindGameObjectWithTag(j.ToString()).GetComponent<Button>();
             if (button.image.sprite == defaultSprite)
-                button.interactable = false;
-
-            // No need to fill array after match end since it is resetting automatically when user presses restart or returns to homescene
-            //fill();
+            {
+                button.interactable = false;                
+            }
         }
         gameOver();
     }

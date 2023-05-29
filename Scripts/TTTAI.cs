@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-public class TTTAI : MonoBehaviour
+using System;
+public class TTTAI
 {
     int i = 0;
     int n = 0;
@@ -157,7 +155,8 @@ public class TTTAI : MonoBehaviour
                 b++;
             }
         }
-        int j =  new System.Random().Next(1,b+1);
+        Random random = new Random();
+        int j = random.Next(1, b + 1);
         i++;
         return (rand[j - 1]);
     }
@@ -176,13 +175,15 @@ public class TTTAI : MonoBehaviour
             return Random(play);
         else if (n1 == 2)
         {
-            int j = new System.Random().Next(1, 5);
+            Random random = new Random();
+            int j = random.Next(1, 5);
             if (i != 1)
                 return Random(play);
         }
         else if (n1 == 3)
         {
-            int j = new System.Random().Next(1, 5);
+            Random random = new Random();
+            int j = random.Next(1, 5);
             if (i == 1)
                 return Random(play);
         }
@@ -266,13 +267,15 @@ public class TTTAI : MonoBehaviour
             return Random(play);
         else if (n1 == 2)
         {
-            int j = new System.Random().Next(1, 5); ;
+            Random random = new Random();
+            int j = random.Next(1, 5);
             if (i != 1)
                 return Random(play);
         }
         else if (n1 == 3)
         {
-            int j = new System.Random().Next(1, 5); 
+            Random random = new Random();
+            int j = random.Next(1, 5);
             if (i == 1)
                 return Random(play);
         }

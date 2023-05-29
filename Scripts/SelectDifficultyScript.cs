@@ -17,6 +17,7 @@ public class SelectDifficultyScript : MonoBehaviour
     {
         selectedDifficulty = "Easy";
         selectedDifficultyIntegerValue = 1;
+        SaveDifficultyTextAndValue();
     }
 
     public void SetDifficultyText()
@@ -52,5 +53,6 @@ public class SelectDifficultyScript : MonoBehaviour
     {
         PlayerPrefs.SetString(DIFFICULTY_SELECTED_STRING, selectedDifficulty);
         PlayerPrefs.SetInt(DIFFICULTY_SELECTED_INTEGER, selectedDifficultyIntegerValue);
+        PlayerPrefs.Save();
     }
 }

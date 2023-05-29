@@ -373,8 +373,6 @@ GameObject:
   m_Component:
   - component: {fileID: 42091947}
   - component: {fileID: 42091948}
-  - component: {fileID: 42091949}
-  - component: {fileID: 42091950}
   m_Layer: 0
   m_Name: Logic Manager
   m_TagString: Untagged
@@ -415,32 +413,6 @@ MonoBehaviour:
   defaultSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   message: {fileID: 1885141771}
   gameOverScreen: {fileID: 1116283825}
-  ai: {fileID: 42091949}
-  check1: {fileID: 42091950}
---- !u!114 &42091949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 42091946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28c434756128cf247bb2214d515e7840, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &42091950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 42091946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4868269df89ac34c94df5b908b4d0d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &60139409
 GameObject:
   m_ObjectHideFlags: 0
@@ -3555,7 +3527,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -450}
-  m_SizeDelta: {x: 350, y: 100}
+  m_SizeDelta: {x: 1800, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1885141771
 MonoBehaviour:
