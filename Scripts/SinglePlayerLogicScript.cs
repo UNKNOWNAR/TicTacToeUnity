@@ -21,6 +21,7 @@ public class SinglePlayerLogicScript : MonoBehaviour
     private int choice =  (new System.Random().Next(2) + 1);
     private char nextCharacter = 'O';
     private bool gameIsOver = false;
+    private int winrange = 0;//contains a code example 13 start from 1 and increment with 3 times to get the win line
 
     private const string DIFFICULTY_SELECTED_STRING = "DifficultySelectedString";
     private const string DIFFICULTY_SELECTED_INTEGER = "DifficultySelectedInteger";
@@ -30,15 +31,11 @@ public class SinglePlayerLogicScript : MonoBehaviour
         fill();
         message.text = (choice == 1) ? "Computer's First Move" : "Your First Move";
         if (choice == 1)
-        {
-            nextCharacter = 'X';
-            outputbyComputer();//To start the game when computer is supposed to give the first move
-        }
+            check1(); //To start the game when computer is supposed to give the first move
         if (PlayerPrefs.HasKey(DIFFICULTY_SELECTED_STRING) && PlayerPrefs.HasKey(DIFFICULTY_SELECTED_INTEGER))
         {
             selectedDifficultyString = PlayerPrefs.GetString(DIFFICULTY_SELECTED_STRING);
             difficulty = PlayerPrefs.GetInt(DIFFICULTY_SELECTED_INTEGER);
-            Debug.Log(difficulty);
             selectedDifficulty.text = difficulty + ". " + selectedDifficultyString;
         }
         else
@@ -79,14 +76,12 @@ public class SinglePlayerLogicScript : MonoBehaviour
         moveNumber++;
         check();
         if (!gameIsOver)
-        {
-            outputbyComputer();
-        }
+            check1();
     }
-    private void outputbyComputer()
+    private void outputbyComputer(int n)
     {
         // Calling TTTAI
-        int n = ai.input(play, choice, previousMove, difficulty);
+        n = (n==0)?ai.input(play, choice, previousMove, difficulty):n;
         //message.text = "Move By Player";
         play[n] = nextCharacter;
         button = GameObject.FindGameObjectWithTag(n.ToString()).GetComponent<Button>();
@@ -95,18 +90,41 @@ public class SinglePlayerLogicScript : MonoBehaviour
         moveNumber++;
             check();
     }
+    private void RandomMove()
+    {
+        int n = 0;
+        if (difficulty == 1)
+            n = ai.Random(play);
+        int randomNumber = ai.randomforClasses(1, 11);//generating random numbers from 1 to 10 from TTTAI class
+        if (randomNumber % 2 == 0 && difficulty == 2)
+            n = ai.Random(play);
+        else if (randomNumber % 3 == 0 && difficulty == 3)
+            n = ai.Random(play);
+        outputbyComputer(n);
+    }
+    void check1()
+    {
+        if (difficulty == 4)
+            outputbyComputer(0);
+        else
+            RandomMove();
+    }
     void check()
     {
         Check check1 = new Check();
         int store = check1.check(play);
+        winrange = store / 10;
+        store = (store != 69) ? store % 10:store;
         
         if (store + choice == 2)
         {
+            Debug.Log(winrange);
             message.text = "Congratulations! You Won";
             moveNumber = 69;            
         }
         else if (store == 0 || store == 1)
         {
+            Debug.Log(winrange);
             message.text = "Computer Won";
             moveNumber = 69;
         }

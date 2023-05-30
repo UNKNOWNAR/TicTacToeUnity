@@ -7,22 +7,31 @@ public class SelectDifficultyScript : MonoBehaviour
     [SerializeField] private Slider difficultySlider;
     [SerializeField] private Color orange;
 
-    private string selectedDifficulty;
-    private int selectedDifficultyIntegerValue;
+    private string selectedDifficultyString;
+    private int selectedDifficultyInt;
+    private float difficultySliderValue;
+    private Color selectedDifficultyColor;
 
     private const string DIFFICULTY_SELECTED_STRING = "DifficultySelectedString";
     private const string DIFFICULTY_SELECTED_INTEGER = "DifficultySelectedInteger";
+    private const string DIFFICULTY_SELECTED_COLOR = "DifficultySelectedColor";
+    private const string DIFFICULTY_SLIDER_POSITION = "DifficultySliderPosition";
 
     private void Awake()
     {
-        selectedDifficulty = "Easy";
-        selectedDifficultyIntegerValue = 1;
-        SaveDifficultyTextAndValue();
+        selectedDifficultyString = "Easy";
+        selectedDifficultyInt = 1;
+        selectedDifficultyColor = Color.green;
+        difficultySlider.value = PlayerPrefs.HasKey(DIFFICULTY_SLIDER_POSITION) ? PlayerPrefs.GetFloat(DIFFICULTY_SLIDER_POSITION) : 0;
+        SaveDifficultyTextString();
+        SaveDifficultyIntValue();
+        SaveDifficultyColorString();
+        SaveDifficultySliderPositionFloatValue();
     }
 
     public void SetDifficultyText()
     {
-        float difficultySliderValue = difficultySlider.value;
+        difficultySliderValue = difficultySlider.value;
 
         if (difficultySliderValue == 0)
         {
@@ -44,15 +53,36 @@ public class SelectDifficultyScript : MonoBehaviour
             difficultyText.color = Color.red;
             difficultyText.text = "Impossible";
         }
-        selectedDifficulty = difficultyText.text;
-        selectedDifficultyIntegerValue = (int) difficultySliderValue + 1;
-        SaveDifficultyTextAndValue();
+        selectedDifficultyString = difficultyText.text;
+        selectedDifficultyInt = (int) difficultySliderValue + 1;
+        selectedDifficultyColor = difficultyText.color;
+        SaveDifficultyTextString();
+        SaveDifficultyIntValue();
+        SaveDifficultyColorString();
+        SaveDifficultySliderPositionFloatValue();
     }
 
-    private void SaveDifficultyTextAndValue()
+    private void SaveDifficultyTextString()
     {
-        PlayerPrefs.SetString(DIFFICULTY_SELECTED_STRING, selectedDifficulty);
-        PlayerPrefs.SetInt(DIFFICULTY_SELECTED_INTEGER, selectedDifficultyIntegerValue);
+        PlayerPrefs.SetString(DIFFICULTY_SELECTED_STRING, selectedDifficultyString);
+        PlayerPrefs.Save();
+    }
+
+    private void SaveDifficultyIntValue()
+    {
+        PlayerPrefs.SetInt(DIFFICULTY_SELECTED_INTEGER, selectedDifficultyInt);
+        PlayerPrefs.Save();
+    }
+
+    private void SaveDifficultyColorString()
+    {
+        PlayerPrefs.SetString(DIFFICULTY_SELECTED_COLOR, ColorUtility.ToHtmlStringRGB(selectedDifficultyColor));
+        PlayerPrefs.Save();
+    }
+
+    private void SaveDifficultySliderPositionFloatValue()
+    {
+        PlayerPrefs.SetFloat(DIFFICULTY_SLIDER_POSITION, difficultySliderValue);
         PlayerPrefs.Save();
     }
 }

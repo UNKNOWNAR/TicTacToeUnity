@@ -1,13 +1,18 @@
 using System;
 public class TTTAI
 {
-    int i = 0;
+    int moveNumber = 0;
     int n = 0;
     int a = 0;
 
+    public int randomforClasses(int min,int max)
+    {
+        int randomNumber = new Random().Next(min, max);
+        return randomNumber;
+    }
     void reset1()
     {
-        i = 0;
+        moveNumber = 0;
         n = 0;
         a = 0;
     }
@@ -57,12 +62,12 @@ public class TTTAI
     {
         if (play[4] == ' ' && n == 2)
         {
-            i++;
+            moveNumber++;
             return 4;
         }
         else if (n == 1 || play[4] != ' ')
         {
-            i++;
+            moveNumber++;
             return 2;
         }
         return 2;
@@ -140,13 +145,12 @@ public class TTTAI
         return -1;
     }
 
-    int Random(char[] play)
+    public int Random(char[] play)
     {
         int b = 0;
         int[] rand = new int[9];
         for (int z = 0; z < 9; z++)
             rand[z] = -1; //-1 is used as filler
-        b = 0;
         for (int i = 0; i < 9; i++)
         {
             if (play[i] == ' ')
@@ -157,7 +161,7 @@ public class TTTAI
         }
         Random random = new Random();
         int j = random.Next(1, b + 1);
-        i++;
+        moveNumber++;
         return (rand[j - 1]);
     }
 
@@ -171,38 +175,22 @@ public class TTTAI
 
     int first(char[] play, int m, int x, int n1)
     {
-        if (n1 == 1)
-            return Random(play);
-        else if (n1 == 2)
-        {
-            Random random = new Random();
-            int j = random.Next(1, 5);
-            if (i != 1)
-                return Random(play);
-        }
-        else if (n1 == 3)
-        {
-            Random random = new Random();
-            int j = random.Next(1, 5);
-            if (i == 1)
-                return Random(play);
-        }
-        if (i == 0)//assigning the first default position top corner
+        if (moveNumber == 0)//assigning the first default position top corner
             return move1(play, m);
-        else if (i > 1 && n == 2)
+        else if (moveNumber > 1 && n == 2)
             return tools3(play, m);
         else if (play[4] == ' ' || n == 1)
         {
             //if player doesn't use center spot to give a move then a confirm win
             n = 1;
-            i++;
+            moveNumber++;
             return fwin1(play, x);
         }
         else if (play[4] != ' ')
         {
             //if player uses center spot and gives a move
             n = 2;
-            i++;
+            moveNumber++;
             return 6;
         }
         return 0;
@@ -210,7 +198,7 @@ public class TTTAI
 
     int fwin1(char[] play, int x)
     {
-        if (i == 2)
+        if (moveNumber == 2)
         {
             //the while loop checks for the position where O is given 
             while (play[a] != 'O')
@@ -221,7 +209,7 @@ public class TTTAI
             else
                 return 0;
         }
-        else if (i == 3)
+        else if (moveNumber == 3)
         {
             n = 2;
             if (a == 0 || a == 1)
@@ -263,44 +251,28 @@ public class TTTAI
 
     int second(char[] play, int n, int n1)
     {
-        if (n1 == 1)
-            return Random(play);
-        else if (n1 == 2)
-        {
-            Random random = new Random();
-            int j = random.Next(1, 5);
-            if (i != 1)
-                return Random(play);
-        }
-        else if (n1 == 3)
-        {
-            Random random = new Random();
-            int j = random.Next(1, 5);
-            if (i == 1)
-                return Random(play);
-        }
-        if (i == 0)//CHECKING FOR WINNING CASE
+        if (moveNumber == 0)//CHECKING FOR WINNING CASE
             return move1(play, n);
-        else if (i == 1 && play[4] == 'O')//STOPPING THE WINNING CASE
+        else if (moveNumber == 1 && play[4] == 'O')//STOPPING THE WINNING CASE
         {
             if (play[0] == 'X' && play[8] == 'X')
             {
-                i++;
+                moveNumber++;
                 return 3;
             }
             else if (play[2] == 'X' && play[6] == 'X')
             {
-                i++;
+                moveNumber++;
                 return 3;
             }
             else if (play[1] == 'X' && play[7] == 'X')
             {
-                i++;
+                moveNumber++;
                 return 0;
             }
             else if (play[3] == 'X' && play[5] == 'X')
             {
-                i++;
+                moveNumber++;
                 return 0;
             }
         }
