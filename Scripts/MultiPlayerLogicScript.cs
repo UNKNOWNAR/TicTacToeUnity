@@ -9,7 +9,7 @@ public class MultiPlayerLogicScript : MonoBehaviour
     [SerializeField] private Sprite defaultSprite;
     [SerializeField] private Text result;
     [SerializeField] private GameObject gameOverScreen;
-    [SerializeField] private SavePlayerNames playerNames;
+    [SerializeField] private SavePlayerNamesScript playerNames;
 
     private int currentButtonNumber, numberOfMoves;
     private Button button;

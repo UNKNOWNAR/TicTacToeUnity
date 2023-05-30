@@ -18,7 +18,7 @@ public class SinglePlayerLogicScript : MonoBehaviour
     private int moveNumber = 0;
     private int difficulty = 4;
     private int previousMove = 69;
-    private int choice =  (new System.Random().Next(2) + 1);
+    private int choice = (new System.Random().Next(2) + 1);
     private char nextCharacter = 'O';
     private bool gameIsOver = false;
     private int winrange = 0;//contains a code example 13 start from 1 and increment with 3 times to get the win line
@@ -31,7 +31,10 @@ public class SinglePlayerLogicScript : MonoBehaviour
         fill();
         message.text = (choice == 1) ? "Computer's First Move" : "Your First Move";
         if (choice == 1)
+        {
+            nextCharacter = 'X';
             check1(); //To start the game when computer is supposed to give the first move
+        }
         if (PlayerPrefs.HasKey(DIFFICULTY_SELECTED_STRING) && PlayerPrefs.HasKey(DIFFICULTY_SELECTED_INTEGER))
         {
             selectedDifficultyString = PlayerPrefs.GetString(DIFFICULTY_SELECTED_STRING);
