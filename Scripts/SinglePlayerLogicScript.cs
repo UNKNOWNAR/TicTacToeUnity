@@ -148,16 +148,14 @@ public class SinglePlayerLogicScript : MonoBehaviour
     }
     private void onGameOver()
     {
+        int i = winrange / 10;
+        int d = winrange % 10;
+        int loopmove = 0;
         for (int j = 0; j < 9; j++)
-        {
-            int i = winrange / 10;
-            int d = winrange % 10;
-            int loopmove = 0;
+        { 
             button = GameObject.FindGameObjectWithTag(j.ToString()).GetComponent<Button>();
             if (button.image.sprite == defaultSprite)
-            {
                 button.interactable = false;                
-            }
             else if (j == i && loopmove != 3&&winrange!=6)
             {
                 if (nextCharacter == 'X')
