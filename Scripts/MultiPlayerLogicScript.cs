@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -6,6 +7,8 @@ public class MultiPlayerLogicScript : MonoBehaviour
 {
     [SerializeField] private Sprite X;
     [SerializeField] private Sprite O;
+    [SerializeField] private Sprite XWIN;
+    [SerializeField] private Sprite OWIN;
     [SerializeField] private Sprite defaultSprite;
     [SerializeField] private Text result;
     [SerializeField] private GameObject gameOverScreen;
@@ -17,6 +20,7 @@ public class MultiPlayerLogicScript : MonoBehaviour
     private char[] moveArray;
     private int winrange = 0;
     private char CharWin = ' ';
+    private char nextCharacter = ' ';
 
     private void Awake()
     {
@@ -87,9 +91,14 @@ public class MultiPlayerLogicScript : MonoBehaviour
             numberOfMoves = 69;
         }
         if (numberOfMoves == 69)
+        {
+            if (store == 0)
+                nextCharacter = 'X';
+            else if (store == 1)
+                nextCharacter = 'O';
             OnGameOver();
+        }
     }
-
 
     private void OnGameOver()
     {
@@ -101,9 +110,12 @@ public class MultiPlayerLogicScript : MonoBehaviour
             button = GameObject.FindGameObjectWithTag(j.ToString()).GetComponent<Button>();
             if (button.image.sprite == defaultSprite)
                 button.interactable = false;
-            else if(j==i&&loopmove!=3)
+            else if(j==i&&loopmove!=3&&winrange!=6)
             {
-                button.image.sprite = defaultSprite;
+                if (nextCharacter == 'X')
+                    button.image.sprite = XWIN;
+                else if (nextCharacter == 'O')
+                    button.image.sprite = OWIN;
                 i += d;
                 loopmove++;
             }
