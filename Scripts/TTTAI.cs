@@ -1,17 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 public class TTTAI
 {
-    int i = 0;
+    int moveNumber = 0;
     int n = 0;
     int a = 0;
-
+    int lastMove = 0;
+    public int randomforClasses(int min,int max)
+    {
+        int randomNumber = new Random().Next(min, max);
+        return randomNumber;
+    }
     void reset1()
     {
-        i = 0;
+        moveNumber = 0;
         n = 0;
         a = 0;
+        lastMove = 0;
     }
 
     int tools(int k)
@@ -55,16 +59,16 @@ public class TTTAI
         return z;
     }
 
-    int move1(char[] play, int n)
+    int firstMove(char[] play, int n)
     {
         if (play[4] == ' ' && n == 2)
         {
-            i++;
+            moveNumber++;
             return 4;
         }
         else if (n == 1 || play[4] != ' ')
         {
-            i++;
+            moveNumber++;
             return 2;
         }
         return 2;
@@ -141,14 +145,24 @@ public class TTTAI
         }
         return -1;
     }
-
-    int Random(char[] play)
+    int wincase1(char[] play)//try to improve this is a win case
+    {
+        if (lastMove == 0||lastMove == 2||lastMove==6||lastMove==8)
+        {
+            for(int i =0;i<=8;i+=2)
+            {
+                if (i != lastMove && i != 4 && play[i] == ' ')
+                    return i;
+            }
+        }
+        return -1;
+    }
+    public int Random(char[] play)
     {
         int b = 0;
         int[] rand = new int[9];
         for (int z = 0; z < 9; z++)
             rand[z] = -1; //-1 is used as filler
-        b = 0;
         for (int i = 0; i < 9; i++)
         {
             if (play[i] == ' ')
@@ -157,51 +171,38 @@ public class TTTAI
                 b++;
             }
         }
-        int j =  new System.Random().Next(1,b+1);
-        i++;
+        Random random = new Random();
+        int j = random.Next(1, b + 1);
+        moveNumber++;
         return (rand[j - 1]);
     }
 
-    public int input(char[] play, int n, int x, int n1)
+    public int input(char[] play, int n, int x)
     {
         if (n == 2)
-            return second(play, n, n1);
+            return second(play, n);
         else
-            return first(play, n, x, n1);
+            return first(play, n, x);
     }
 
-    int first(char[] play, int m, int x, int n1)
+    int first(char[] play, int m, int x)
     {
-        if (n1 == 1)
-            return Random(play);
-        else if (n1 == 2)
-        {
-            int j = new System.Random().Next(1, 5);
-            if (i != 1)
-                return Random(play);
-        }
-        else if (n1 == 3)
-        {
-            int j = new System.Random().Next(1, 5);
-            if (i == 1)
-                return Random(play);
-        }
-        if (i == 0)//assigning the first default position top corner
-            return move1(play, m);
-        else if (i > 1 && n == 2)
+        if (moveNumber == 0)//assigning the first default position top corner
+            return firstMove(play, m);
+        else if (moveNumber > 1 && n == 2)
             return tools3(play, m);
         else if (play[4] == ' ' || n == 1)
         {
             //if player doesn't use center spot to give a move then a confirm win
             n = 1;
-            i++;
+            moveNumber++;
             return fwin1(play, x);
         }
         else if (play[4] != ' ')
         {
             //if player uses center spot and gives a move
             n = 2;
-            i++;
+            moveNumber++;
             return 6;
         }
         return 0;
@@ -209,7 +210,7 @@ public class TTTAI
 
     int fwin1(char[] play, int x)
     {
-        if (i == 2)
+        if (moveNumber == 2)
         {
             //the while loop checks for the position where O is given 
             while (play[a] != 'O')
@@ -220,7 +221,7 @@ public class TTTAI
             else
                 return 0;
         }
-        else if (i == 3)
+        else if (moveNumber == 3)
         {
             n = 2;
             if (a == 0 || a == 1)
@@ -260,44 +261,33 @@ public class TTTAI
         return 0;
     }
 
-    int second(char[] play, int n, int n1)
+    int second(char[] play, int n)
     {
-        if (n1 == 1)
-            return Random(play);
-        else if (n1 == 2)
+        if (moveNumber == 0)//CHECKING FOR WINNING CASE
         {
-            int j = new System.Random().Next(1, 5); ;
-            if (i != 1)
-                return Random(play);
+            lastMove = firstMove(play, n);
+            return lastMove;
         }
-        else if (n1 == 3)
-        {
-            int j = new System.Random().Next(1, 5); 
-            if (i == 1)
-                return Random(play);
-        }
-        if (i == 0)//CHECKING FOR WINNING CASE
-            return move1(play, n);
-        else if (i == 1 && play[4] == 'O')//STOPPING THE WINNING CASE
+        else if (moveNumber == 1 && play[4] == 'O')//STOPPING THE WINNING CASE
         {
             if (play[0] == 'X' && play[8] == 'X')
             {
-                i++;
+                moveNumber++;
                 return 3;
             }
             else if (play[2] == 'X' && play[6] == 'X')
             {
-                i++;
+                moveNumber++;
                 return 3;
             }
             else if (play[1] == 'X' && play[7] == 'X')
             {
-                i++;
+                moveNumber++;
                 return 0;
             }
             else if (play[3] == 'X' && play[5] == 'X')
             {
-                i++;
+                moveNumber++;
                 return 0;
             }
         }
@@ -309,22 +299,17 @@ public class TTTAI
         z = move2(play, n);
         if (z != -1)
             return z;
+        if (moveNumber == 1)
+        {
+            z = wincase1(play);
+            if (z != -1)
+            {
+                moveNumber++;
+                return z;
+            }
+        }
         //calls for the random function to allot position at random as no pattern is present
         z = Random(play);
         return z;
-    }
-}
-public class TTTAI1 : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

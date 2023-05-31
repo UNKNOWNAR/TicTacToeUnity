@@ -1,14 +1,21 @@
 using System;
-public class Check 
+public class Check
 {
-    public char check(char[] play)
+    // "X" - 0,"O" - 1,No Result - 69
+    char c;
+    int z = 0;
+    public int check(char[] play)
     {
         int i = 0;
         // Check for vertical column
         while (i < 3)
         {
             if (play[i] == play[i + 3] && play[i] == play[i + 6] && play[i] != ' ')
-                return play[i];
+            {
+                c = play[i];
+                z = i * 10 + 3;
+                break;
+            }
             i++;
         }
         i = 0;
@@ -16,7 +23,11 @@ public class Check
         while (i < 7)
         {
             if (play[i] == play[i + 1] && play[i] == play[i + 2] && play[i] != ' ')
-                return play[i];
+            {
+                z = i * 10 + 1;
+                c = play[i];
+                break;
+            }
             i += 3;
         }
         i = 0;
@@ -24,11 +35,19 @@ public class Check
         int d = 4;
         while (d != 1)
         {
-            if (play[i] == play[i + d] && play[i] == play[i + 2 * d])
-                return play[i];
+            if (play[i] == play[i + d] && play[i] == play[i + 2 * d] && play[i] != ' ')
+            {
+                c = play[i];
+                z = 10 * i + d;
+                break;
+            }
             i += 2;
             d /= 2;
         }
-        return 'n';
+        if (c == 'X')
+            return (z*10);
+        else if(c =='O')
+            return (z*10+1);
+        return 69;
     }
 }

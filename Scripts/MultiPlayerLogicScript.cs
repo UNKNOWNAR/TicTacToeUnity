@@ -6,23 +6,26 @@ public class MultiPlayerLogicScript : MonoBehaviour
 {
     [SerializeField] private Sprite X;
     [SerializeField] private Sprite O;
+    [SerializeField] private Sprite XWIN;
+    [SerializeField] private Sprite OWIN;
     [SerializeField] private Sprite defaultSprite;
     [SerializeField] private Text result;
     [SerializeField] private GameObject gameOverScreen;
-    [SerializeField] private AudioSource clickSoundSource;
+    [SerializeField] private SavePlayerNamesScript playerNames;
 
-    private int currentButtonNumber,numberOfMoves;
+    private int currentButtonNumber, numberOfMoves;
     private Button button;
     private bool isTurnOfX;
     private char[] moveArray;
-    private float pitch;
+    private int winrange = 0;
+    private char CharWin = ' ';
+    private char nextCharacter = ' ';
 
     private void Awake()
     {
         numberOfMoves = 0;
         isTurnOfX = true;
         moveArray = new char[9];
-        pitch = 0.1f;
     }
 
     private void Update()
@@ -31,7 +34,7 @@ public class MultiPlayerLogicScript : MonoBehaviour
         button = GameObject.FindGameObjectWithTag(currentButtonNumber.ToString()).GetComponent<Button>();
         if (result.text == "X Wins!" || result.text == "O Wins!" || result.text == "Draw!")
         {
-            onGameOver();
+            OnGameOver();
         }
     }
 
@@ -56,71 +59,70 @@ public class MultiPlayerLogicScript : MonoBehaviour
         }
         button.enabled = false;
         numberOfMoves++;
-        clickSoundSource.pitch = pitch;
-        clickSoundSource.Play();
-        pitch += 0.05F;
+        CheckForGameOver();
     }
 
-    public void checkWinner()
+    void CheckForGameOver()
     {
-        //checks rows
-
-        if (moveArray[0] == moveArray[1] && moveArray[1] == moveArray[2])
+        string playerWithX = playerNames.GetPlayer1Name();
+        string playerWithO = playerNames.GetPlayer2Name();
+        Check check1 = new Check();
+        int store = check1.check(moveArray);
+        winrange = store / 10;
+        store = (store != 69) ? store % 10 : store;
+        if (store == 0)
+            CharWin = 'X';
+        else
+            CharWin = 'Y';
+        if (store == 0)
         {
-            result.text = moveArray[0].ToString() + " Wins!";
+            result.text = playerWithX + " Wins!";
+            numberOfMoves = 69;
         }
-        else if (moveArray[3] == moveArray[4] && moveArray[4] == moveArray[5])
+        else if (store == 1)
         {
-            result.text = moveArray[3].ToString() + " Wins!";
+            result.text = playerWithO + " Wins!";
+            numberOfMoves = 69;
         }
-        else if (moveArray[6] == moveArray[7] && moveArray[7] == moveArray[8])
+        else if (numberOfMoves >= 9)
         {
-            result.text = moveArray[6].ToString() + " Wins!";
+            result.text = "Game is a Draw";
+            numberOfMoves = 69;
         }
-
-        //checks columns
-
-        else if (moveArray[0] == moveArray[3] && moveArray[3] == moveArray[6])
+        if (numberOfMoves == 69)
         {
-            result.text = moveArray[0].ToString() + " Wins!";
-        }
-        else if (moveArray[1] == moveArray[4] && moveArray[4] == moveArray[7])
-        {
-            result.text = moveArray[1].ToString() + " Wins!";
-        }
-        else if (moveArray[2] == moveArray[5] && moveArray[5] == moveArray[8])
-        {
-            result.text = moveArray[2].ToString() + " Wins!";
-        }
-
-        //checks diagonals
-
-        else if (moveArray[0] == moveArray[4] && moveArray[4] == moveArray[8])
-        {
-            result.text = moveArray[0].ToString() + " Wins!";
-        }
-        else if (moveArray[2] == moveArray[4] && moveArray[4] == moveArray[6])
-        {
-            result.text = moveArray[2].ToString() + " Wins!";
-        }
-        else if(numberOfMoves==9)
-        {
-            result.text = "Draw!";
+            if (store == 0)
+                nextCharacter = 'X';
+            else if (store == 1)
+                nextCharacter = 'O';
+            OnGameOver();
         }
     }
 
-    private void onGameOver()
+    private void OnGameOver()
     {
+        int i = winrange / 10;
+        int d = winrange % 10;
+        int loopmove = 0;
         for (int j = 0; j < 9; j++)
         {
             button = GameObject.FindGameObjectWithTag(j.ToString()).GetComponent<Button>();
             if (button.image.sprite == defaultSprite)
                 button.interactable = false;
+            else if(j==i&&loopmove!=3&&winrange!=6)
+            {
+                if (nextCharacter == 'X')
+                    button.image.sprite = XWIN;
+                else if (nextCharacter == 'O')
+                    button.image.sprite = OWIN;
+                i += d;
+                loopmove++;
+            }
         }
-        gameOver();
+        EnableGameOverScreen();
     }
 
-    private void gameOver()
+    private void EnableGameOverScreen()
     {
         gameOverScreen.SetActive(true);
     }
