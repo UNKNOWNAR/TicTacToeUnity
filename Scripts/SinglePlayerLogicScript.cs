@@ -155,7 +155,7 @@ public class SinglePlayerLogicScript : MonoBehaviour
         { 
             button = GameObject.FindGameObjectWithTag(j.ToString()).GetComponent<Button>();
             if (button.image.sprite == defaultSprite)
-                button.interactable = false;
+                button.interactable = false;                
             else if (j == i && loopmove != 3&&winrange!=6)
             {
                 if (nextCharacter == 'X')
@@ -164,7 +164,7 @@ public class SinglePlayerLogicScript : MonoBehaviour
                     button.image.sprite = OWIN;
                 i += d;
                 loopmove++;
-             }
+            }
         }
         gameOver();
     }
