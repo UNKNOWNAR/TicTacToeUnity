@@ -7,6 +7,8 @@ public class SinglePlayerLogicScript : MonoBehaviour
     [SerializeField] private Text selectedDifficulty;
     [SerializeField] private Sprite X;
     [SerializeField] private Sprite O;
+    [SerializeField] private Sprite XWIN;
+    [SerializeField] private Sprite OWIN;
     [SerializeField] private Sprite defaultSprite;
     [SerializeField] private Text message;
     [SerializeField] private GameObject gameOverScreen;
@@ -19,7 +21,7 @@ public class SinglePlayerLogicScript : MonoBehaviour
     private int difficulty = 4;
     private int previousMove = 69;
     private int choice = (new System.Random().Next(2) + 1);
-    private char nextCharacter = 'O';
+    private char nextCharacter = 'O';//stores charcter for computers move and also the winning character
     private bool gameIsOver = false;
     private int winrange = 0;//contains a code example 13 start from 1 and increment with 3 times to get the win line
 
@@ -121,13 +123,11 @@ public class SinglePlayerLogicScript : MonoBehaviour
         
         if (store + choice == 2)
         {
-            Debug.Log(winrange);
             message.text = "Congratulations! You Won";
             moveNumber = 69;            
         }
         else if (store == 0 || store == 1)
         {
-            Debug.Log(winrange);
             message.text = "Computer Won";
             moveNumber = 69;
         }
@@ -138,19 +138,33 @@ public class SinglePlayerLogicScript : MonoBehaviour
         }
         if (moveNumber == 69)
         {
+            if (store == 0)
+                nextCharacter = 'X';
+            else if (store == 1)
+                nextCharacter = 'O';
             gameIsOver = true;
             onGameOver();
         }
     }
     private void onGameOver()
     {
+        int i = winrange / 10;
+        int d = winrange % 10;
+        int loopmove = 0;
         for (int j = 0; j < 9; j++)
-        {
+        { 
             button = GameObject.FindGameObjectWithTag(j.ToString()).GetComponent<Button>();
             if (button.image.sprite == defaultSprite)
+                button.interactable = false;
+            else if (j == i && loopmove != 3&&winrange!=6)
             {
-                button.interactable = false;                
-            }
+                if (nextCharacter == 'X')
+                    button.image.sprite = XWIN;
+                else if(nextCharacter == 'O')
+                    button.image.sprite = OWIN;
+                i += d;
+                loopmove++;
+             }
         }
         gameOver();
     }

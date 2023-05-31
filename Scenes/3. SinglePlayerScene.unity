@@ -411,6 +411,8 @@ MonoBehaviour:
   selectedDifficulty: {fileID: 255789615}
   X: {fileID: 21300000, guid: e47a1c391d1a12e4184ea9f5553fd649, type: 3}
   O: {fileID: 21300000, guid: d8372a6abd4e8ee40838a0ca3969afdc, type: 3}
+  XWIN: {fileID: 21300000, guid: 88df3a3f7040bcd4b96ebd5827b13a11, type: 3}
+  OWIN: {fileID: 21300000, guid: 431e495f8b1fe10419ed5604667550c3, type: 3}
   defaultSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   message: {fileID: 1885141771}
   gameOverScreen: {fileID: 1116283825}

@@ -4,7 +4,7 @@ public class TTTAI
     int moveNumber = 0;
     int n = 0;
     int a = 0;
-
+    int lastMove = 0;
     public int randomforClasses(int min,int max)
     {
         int randomNumber = new Random().Next(min, max);
@@ -15,6 +15,7 @@ public class TTTAI
         moveNumber = 0;
         n = 0;
         a = 0;
+        lastMove = 0;
     }
 
     int tools(int k)
@@ -144,7 +145,18 @@ public class TTTAI
         }
         return -1;
     }
-
+    int wincase1(char[] play)//try to improve this is a win case
+    {
+        if (lastMove == 0)
+            return 2;
+        else if (lastMove == 2)
+            return 0;
+        else if (lastMove == 6)
+            return 0;
+        else if (lastMove == 8)
+            return 2;
+        return -1;
+    }
     public int Random(char[] play)
     {
         int b = 0;
@@ -252,7 +264,10 @@ public class TTTAI
     int second(char[] play, int n, int n1)
     {
         if (moveNumber == 0)//CHECKING FOR WINNING CASE
-            return move1(play, n);
+        {
+            lastMove = move1(play, n);
+            return lastMove;
+        }
         else if (moveNumber == 1 && play[4] == 'O')//STOPPING THE WINNING CASE
         {
             if (play[0] == 'X' && play[8] == 'X')
@@ -284,6 +299,15 @@ public class TTTAI
         z = move2(play, n);
         if (z != -1)
             return z;
+        if (moveNumber == 1)
+        {
+            z = wincase1(play);
+            if (z != -1)
+            {
+                moveNumber++;
+                return z;
+            }
+        }
         //calls for the random function to allot position at random as no pattern is present
         z = Random(play);
         return z;
