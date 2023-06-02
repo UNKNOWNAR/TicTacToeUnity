@@ -21,7 +21,7 @@ public class SinglePlayerLogicScript : MonoBehaviour
     private int moveNumber = 0;
     private int difficulty = 4;
     private int previousMove = 69;
-    private int choice = (new System.Random().Next(2) + 1);
+    private int choice;
     private char nextCharacter;//stores charcter for computers move and also the winning character
     private bool gameIsOver = false;
     private int winrange = 0;//contains a code example 13 start from 1 and increment with 3 times to get the win line
@@ -36,8 +36,10 @@ public class SinglePlayerLogicScript : MonoBehaviour
     {
         playerChoiceSprite = XorO.GetPlayerChoiceSprite();
         playerChoiceChar = XorO.GetPlayerChoiceChar();
+        Debug.Log("player choice char in logic = " + playerChoiceChar);
         nextCharacter = playerChoiceChar == 'X' ? 'O' : 'X';
         fill();
+        choice = Random.Range(1, 3);
         message.text = (choice == 1) ? "Computer's First Move" : "Your First Move";
         if (choice == 1)
         {
@@ -88,7 +90,7 @@ public class SinglePlayerLogicScript : MonoBehaviour
         button.enabled = false;
         previousMove = n;
         moveNumber++;
-        check();
+        CheckForGameOver();
         if (!gameIsOver)
             check1();
     }
@@ -102,28 +104,28 @@ public class SinglePlayerLogicScript : MonoBehaviour
         button.enabled = false;
         button.image.sprite = (nextCharacter == 'X') ? X : O;
         moveNumber++;
-            check();
+            CheckForGameOver();
     }
     private void RandomMove()
     {
         int n = 0;
         if (difficulty == 1)
             n = ai.Random(play);
-        int randomNumber = ai.randomforClasses(1, 11);//generating random numbers from 1 to 10 from TTTAI class
+        int randomNumber = Random.Range(1, 11);//generating random numbers from 1 to 10 from unity inbuilt class
         if (randomNumber % 2 == 0 && difficulty == 2)
             n = ai.Random(play);
         else if (randomNumber % 3 == 0 && difficulty == 3)
             n = ai.Random(play);
         outputbyComputer(n);
     }
-    void check1()
+    private void check1()
     {
         if (difficulty == 4)
             outputbyComputer(0);
         else
             RandomMove();
     }
-    void check()
+    private void CheckForGameOver()
     {
         Check check1 = new Check();
         int store = check1.check(play);
@@ -164,7 +166,7 @@ public class SinglePlayerLogicScript : MonoBehaviour
         { 
             button = GameObject.FindGameObjectWithTag(j.ToString()).GetComponent<Button>();
             if (button.image.sprite == defaultSprite)
-                button.interactable = false;                
+                button.image.color = Camera.main.backgroundColor;                
             else if (j == i && loopmove != 3&&winrange!=6)
             {
                 if (nextCharacter == 'X')
@@ -175,9 +177,9 @@ public class SinglePlayerLogicScript : MonoBehaviour
                 loopmove++;
             }
         }
-        gameOver();
+        EnableGameOverScreen();
     }
-    private void gameOver()
+    private void EnableGameOverScreen()
     {
         gameOverScreen.SetActive(true);
     }

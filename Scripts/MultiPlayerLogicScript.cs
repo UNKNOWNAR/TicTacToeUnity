@@ -29,16 +29,6 @@ public class MultiPlayerLogicScript : MonoBehaviour
         moveArray = new char[9];
     }
 
-    private void Update()
-    {
-        currentButtonNumber = GetLastButtonClicked();
-        button = GameObject.FindGameObjectWithTag(currentButtonNumber.ToString()).GetComponent<Button>();
-        if (result.text == "X Wins!" || result.text == "O Wins!" || result.text == "Draw!")
-        {
-            OnGameOver();
-        }
-    }
-
     private int GetLastButtonClicked()
     {
         return int.Parse(EventSystem.current.currentSelectedGameObject.name);
@@ -46,6 +36,8 @@ public class MultiPlayerLogicScript : MonoBehaviour
 
     public void OnButtonClicked()
     {
+        currentButtonNumber = GetLastButtonClicked();
+        button = GameObject.FindGameObjectWithTag(currentButtonNumber.ToString()).GetComponent<Button>();
         if (isTurnOfX)
         {
             button.image.sprite = X;
@@ -109,7 +101,7 @@ public class MultiPlayerLogicScript : MonoBehaviour
         {
             button = GameObject.FindGameObjectWithTag(j.ToString()).GetComponent<Button>();
             if (button.image.sprite == defaultSprite)
-                button.interactable = false;
+                button.image.color = Camera.main.backgroundColor;            
             else if(j==i&&loopmove!=3&&winrange!=6)
             {
                 if (nextCharacter == 'X')
