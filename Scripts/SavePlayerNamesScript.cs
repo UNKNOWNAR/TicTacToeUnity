@@ -20,35 +20,36 @@ public class SavePlayerNamesScript : MonoBehaviour
         if (PlayerPrefs.HasKey(PLAYER_1))
         {
             player1Name = PlayerPrefs.GetString(PLAYER_1);
-            player1.text = player1Name;
-        }
-        else
-        {
-            player1Name = PLAYER_1;
+            player1.text = player1Name == PLAYER_1 ? "" : player1Name;
         }
 
         if (PlayerPrefs.HasKey(PLAYER_2))
         {
             player2Name = PlayerPrefs.GetString(PLAYER_2);
-            player2.text = player2Name;
+            player2.text = player2Name == PLAYER_2 ? "" : player2Name;
         }
-        else
-        {
-            player2Name = PLAYER_2;
-        }
+
         SavePlayerNames();
     }
 
     public void OnPlayButtonClicked()
     {        
-        if (player1.text != player1Name)
+        if (player1.text != player1Name && player1.text != "")
         {
             player1Name = player1.text;
         }
+        else if (player1.text == "")
+        {
+            player1Name = PLAYER_1;
+        }
 
-        if (player2.text != player2Name)
+        if (player2.text != player2Name && player2.text != "")
         {
             player2Name = player2.text;
+        }
+        else if (player2.text == "")
+        {
+            player2Name = PLAYER_2;
         }
 
         SavePlayerNames();
@@ -56,6 +57,15 @@ public class SavePlayerNamesScript : MonoBehaviour
         Debug.Log(player1Name + " " + player2Name);
 
         playerNamesCanvas.SetActive(false);
+    }
+
+    public void OnResetButtonClicked()
+    {
+        player1.text = "";
+        player1Name = PLAYER_1;
+        player2.text = "";
+        player2Name = PLAYER_2;
+        SavePlayerNames();
     }
 
     public string GetPlayer1Name()
